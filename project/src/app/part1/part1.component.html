@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-header" [title]="title">
+        {{ title }}
+    </div>
+    <div class="card-body">
+
+        <form>
+            <div class="form-group">
+                <label for="product-name">ชื่อสินค้า</label>
+                <input type="text" class="form-control" id="product-name">
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="product-amount">จำนวนสินค้า</label>
+                        <input value="0" type="number" class="form-control" id="product-amount">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label for="product-price">ราคาสินค้า</label>
+                        <input value="0" type="number" class="form-control" id="product-price">
+                    </div>
+                </div>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">
+                บันทึกข้อมูล
+            </button>
+        </form>
+
+    </div>
+</div>

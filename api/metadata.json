@@ -1,0 +1,24 @@
+{
+    "model": {
+        "poId": "number (auto generate)",
+        "companyName": "string",
+        "companyAddress": "string",
+        "customerAddress": "string",
+        "poNumber": "string",
+        "poDate": "string",
+        "poCreated": "string (auto generate)",
+        "poUpdated": "string (auto generate)",
+        "products": [
+            {
+                "productName": "string",
+                "productAmount": "number",
+                "productPrice": "number"
+            },
+            {
+                "productName": "string",
+                "productAmount": "number",
+                "productPrice": "number"
+            }
+        ]
+    }
+}
