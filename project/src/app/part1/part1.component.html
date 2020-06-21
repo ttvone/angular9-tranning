@@ -8,6 +8,12 @@
             <div class="form-group">
                 <label for="product-name">ชื่อสินค้า</label>
                 <input formControlName="productName" type="text" class="form-control" id="product-name">
+                <div *ngIf="(form.get('productName').errors || {}).required" class="invalid-feedback">
+                    กรุณากรอกข้อมูล
+                </div>
+                <div *ngIf="(form.get('productName').errors || {}).maxlength" class="invalid-feedback">
+                    กรุณากรอกจำนวนไม่เกิน 10 ตัว
+                </div>
             </div>
 
             <div class="row">
@@ -15,16 +21,27 @@
                     <div class="form-group">
                         <label for="product-amount">จำนวนสินค้า</label>
                         <input formControlName="productAmount" type="number" class="form-control" id="product-amount">
+                        <div *ngIf="(form.get('productAmount').errors || {}).required" class="invalid-feedback">
+                            กรุณากรอกข้อมูล
+                        </div>
+                        <div *ngIf="(form.get('productAmount').errors || {}).min" class="invalid-feedback">
+                            กรุณากรอกจำนวนต้องมากกว่า 1
+                        </div>
                     </div>
                 </div>
                 <div class="col-6">
                     <div class="form-group">
                         <label for="product-price">ราคาสินค้า</label>
                         <input formControlName="productPrice" type="number" class="form-control" id="product-price">
+                        <div *ngIf="(form.get('productPrice').errors || {}).required" class="invalid-feedback">
+                            กรุณากรอกข้อมูล
+                        </div>
+                        <div *ngIf="(form.get('productPrice').errors || {}).min" class="invalid-feedback">
+                            กรุณากรอกจำนวนต้องมากกว่า 1
+                        </div>
                     </div>
                 </div>
             </div>
-
 
             <button type="submit" class="btn btn-primary">
                 บันทึกข้อมูล
