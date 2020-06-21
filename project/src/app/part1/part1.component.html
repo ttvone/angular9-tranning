@@ -43,9 +43,19 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">
-                บันทึกข้อมูล
-            </button>
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="submit" class="btn btn-primary btn-block">
+                        บันทึกข้อมูล
+                    </button>
+                </div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <button (click)="close.emit()" type="button" class="btn btn-danger btn-block">
+                        ปิดหน้านี้
+                    </button>
+                </div>
+            </div>
         </form>
 
     </div>

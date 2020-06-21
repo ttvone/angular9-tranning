@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PartService } from '../services/part.service';
 import { IProduct } from '../interfaces/IProduct';
@@ -20,6 +20,7 @@ export class Part1Component implements OnInit {
     this.form.get('productAmount').setValue(item.productAmount);
     this.form.get('productPrice').setValue(item.productPrice);
   }
+  @Output('close') close = new EventEmitter();
 
   /** create form data */
   form: FormGroup;
@@ -56,6 +57,8 @@ export class Part1Component implements OnInit {
           this.form.get('productAmount').setValue(0);
           this.form.get('productPrice').setValue(0);
           this.productId = null;
+          document.getElementById('product-name').focus();
+          // this.close.emit();
         },
         // หากว่าล้มเหลว
         err => {
@@ -70,6 +73,8 @@ export class Part1Component implements OnInit {
           this.form.get('productAmount').setValue(0);
           this.form.get('productPrice').setValue(0);
           this.productId = null;
+          document.getElementById('product-name').focus();
+          // this.close.emit();
         },
         // หากว่าล้มเหลว
         err => {

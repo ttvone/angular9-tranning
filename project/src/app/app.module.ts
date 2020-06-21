@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { Part1Component } from './part1/part1.component';
 import { Part2Component } from './part2/part2.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       BrowserModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
+      ModalModule.forRoot(),
       FormsModule,
       ReactiveFormsModule
    ],
