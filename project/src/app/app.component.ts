@@ -9,16 +9,4 @@ import { ModalDirective } from 'ngx-bootstrap/modal';
 })
 export class AppComponent {
   title = 'Angular Project';
-  item: IProduct;
-
-  @ViewChild('staticModal') staticModal: ModalDirective;
-
-  constructor() {
-  }
-
-  /** receive product item */
-  onUpdate(item: IProduct) {
-    this.item = item;
-    this.staticModal.show();
-  }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IProduct } from '../interfaces/IProduct';
-import { PartService } from '../services/part.service';
+import { IProduct } from '../../../../interfaces/IProduct';
+import { PartService } from '../../../../services/part.service';
 
 @Component({
   selector: 'app-part2',

@@ -1,0 +1,15 @@
+<div class="container mt-2">
+    <button (click)="staticModal.show()" class="btn btn-primary mb-3">
+        Add new product
+    </button>
+    <app-part2 (update)="onUpdate($event)" title="รายการแสดงข้อมูลสินค้า"></app-part2>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" tabindex="-1" role="dialog"
+    aria-labelledby="dialog-static-name">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <app-part1 (close)="staticModal.hide()" [item]="item" title="ฟอร์มกรอกข้อมูลสินค้า"></app-part1>
+        </div>
+    </div>
+</div>

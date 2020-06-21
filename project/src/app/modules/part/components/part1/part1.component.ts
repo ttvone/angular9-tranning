@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { PartService } from '../services/part.service';
-import { IProduct } from '../interfaces/IProduct';
+import { PartService } from '../../../../services/part.service';
+import { IProduct } from '../../../../interfaces/IProduct';
 
 @Component({
   selector: 'app-part1',
