@@ -46,13 +46,18 @@ export class PartService {
   /** get product items */
   getItems() {
     return of(this.products);
+    // sort
+    // return of(this.products.sort((a, b) => b.productId - a.productId));
   }
 
   /** insert product item */
   addItem(value: IProduct) {
     return new Observable(observ => {
-      value.productId = Math.random();
+      const maxIds = this.products.map(m => m.productId);
+      value.productId = this.products.length > 0 ? Math.max.apply(maxIds) + 1 : 1;
       this.products.push(value);
+      // sort
+      // this.products.unshift(value); 
       observ.next({ message: 'สำเร็จ' });
     });
   }
