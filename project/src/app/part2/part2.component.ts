@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IProduct } from '../interfaces/IProduct';
 import { PartService } from '../services/part.service';
 
@@ -10,6 +10,7 @@ import { PartService } from '../services/part.service';
 export class Part2Component implements OnInit {
 
   @Input('title') title: string = 'Part 2';
+  @Output('update') update = new EventEmitter<IProduct>();
 
   /** รายการสินค้า */
   products: IProduct[];
@@ -23,6 +24,11 @@ export class Part2Component implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  /** แก้ไขสินค้า */
+  onUpdateProduct(item: IProduct) {
+    this.update.emit(item);
   }
 
   /** ลบสินค้า */

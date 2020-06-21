@@ -1,10 +1,10 @@
 <div class="container mt-2">
     <div class="row">
         <div class="col-5">
-            <app-part1 title="ฟอร์มกรอกข้อมูลสินค้า"></app-part1>
+            <app-part1 [item]="item" title="ฟอร์มกรอกข้อมูลสินค้า"></app-part1>
         </div>
         <div class="col-7">
-            <app-part2 title="รายการแสดงข้อมูลสินค้า"></app-part2>
+            <app-part2 (update)="onUpdate($event)" title="รายการแสดงข้อมูลสินค้า"></app-part2>
         </div>
     </div>
 </div>

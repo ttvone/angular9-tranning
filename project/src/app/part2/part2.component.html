@@ -19,7 +19,9 @@
             <td class="text-center">{{ item.productAmount | number }}</td>
             <td class="text-center">{{ item.productPrice | number : '1.2-2' }}</td>
             <td class="text-right">
-              <button class="btn btn-warning btn-sm mr-2 btn-w">แก้ไข</button>
+              <button (click)="onUpdateProduct(item)" class="btn btn-warning btn-sm mr-2 btn-w">
+                แก้ไข
+              </button>
               <button (click)="onDeleteProduct(item)" class="btn btn-danger btn-sm btn-w">
                 ลบทิ้ง
               </button>

@@ -57,4 +57,16 @@ export class PartService {
     });
   }
 
+  /** update item */
+  updateItem(id: number, value: IProduct) {
+    return new Observable(observ => {
+      const product = this.products.find(m => m.productId == id);
+      if (!product) return observ.error({ message: 'ไม่มีสินค้า' });
+      product.productName = value.productName;
+      product.productAmount = value.productAmount;
+      product.productPrice = value.productPrice;
+      observ.next({ message: 'สำเร็จ' });
+    });
+  }
+
 }

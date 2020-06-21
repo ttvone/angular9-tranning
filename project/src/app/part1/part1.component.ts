@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { PartService } from '../services/part.service';
+import { IProduct } from '../interfaces/IProduct';
 
 @Component({
   selector: 'app-part1',
@@ -9,7 +10,16 @@ import { PartService } from '../services/part.service';
 })
 export class Part1Component implements OnInit {
 
+  private productId: number;
+
   @Input('title') title: string;
+  @Input('item') set setItem(item: IProduct) {
+    if (!item) return;
+    this.productId = item.productId;
+    this.form.get('productName').setValue(item.productName);
+    this.form.get('productAmount').setValue(item.productAmount);
+    this.form.get('productPrice').setValue(item.productPrice);
+  }
 
   /** create form data */
   form: FormGroup;
@@ -38,17 +48,34 @@ export class Part1Component implements OnInit {
   /** for submit form */
   onSubmit() {
     if (this.form.invalid) return this.form.markAllAsTouched();
-    this.service.addItem(this.form.value).subscribe(
-      // หากว่าสำเร็จ
-      res => {
-        this.form.reset();
-        this.form.get('productAmount').setValue(0);
-        this.form.get('productPrice').setValue(0);
-      },
-      // หากว่าล้มเหลว
-      err => {
-        alert(err.message);
-      });
+    if (this.productId) {
+      this.service.updateItem(this.productId, this.form.value).subscribe(
+        // หากว่าสำเร็จ
+        res => {
+          this.form.reset();
+          this.form.get('productAmount').setValue(0);
+          this.form.get('productPrice').setValue(0);
+          this.productId = null;
+        },
+        // หากว่าล้มเหลว
+        err => {
+          alert(err.message);
+        });
+    }
+    else {
+      this.service.addItem(this.form.value).subscribe(
+        // หากว่าสำเร็จ
+        res => {
+          this.form.reset();
+          this.form.get('productAmount').setValue(0);
+          this.form.get('productPrice').setValue(0);
+          this.productId = null;
+        },
+        // หากว่าล้มเหลว
+        err => {
+          alert(err.message);
+        });
+    }
   }
 
 }
