@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { PartService } from '../services/part.service';
 
 @Component({
   selector: 'app-part1',
@@ -13,7 +14,7 @@ export class Part1Component implements OnInit {
   /** create form data */
   form: FormGroup;
 
-  constructor(private builder: FormBuilder) {
+  constructor(private builder: FormBuilder, private service: PartService) {
     /** create default form data */
     this.form = this.builder.group({
       productName: ['', [
@@ -37,7 +38,17 @@ export class Part1Component implements OnInit {
   /** for submit form */
   onSubmit() {
     if (this.form.invalid) return this.form.markAllAsTouched();
-    console.log(this.form.value);
+    this.service.addItem(this.form.value).subscribe(
+      // หากว่าสำเร็จ
+      res => {
+        this.form.reset();
+        this.form.get('productAmount').setValue(0);
+        this.form.get('productPrice').setValue(0);
+      },
+      // หากว่าล้มเหลว
+      err => {
+        alert(err.message);
+      });
   }
 
 }
