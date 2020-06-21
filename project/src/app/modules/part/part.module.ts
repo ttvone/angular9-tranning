@@ -4,6 +4,7 @@ import { Part1Component } from './components/part1/part1.component';
 import { Part2Component } from './components/part2/part2.component';
 import { HomeComponent } from './components/home/home.component';
 import { SharedModule } from 'src/app/shared.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,11 @@ import { SharedModule } from 'src/app/shared.module';
   ],
   imports: [
     CommonModule,
-    SharedModule
+    SharedModule,
+    RouterModule.forChild([
+      { path: '', component: HomeComponent },
+      { path: '**', redirectTo: '', pathMatch: 'full' },
+    ])
   ]
 })
 export class PartModule { }
