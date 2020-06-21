@@ -7,6 +7,7 @@ import { Part2Component } from './part2/part2.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
    declarations: [
@@ -17,7 +18,9 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
    imports: [
       BrowserModule,
       BrowserAnimationsModule,
-      BsDropdownModule.forRoot()
+      BsDropdownModule.forRoot(),
+      FormsModule,
+      ReactiveFormsModule
    ],
    providers: [],
    bootstrap: [
