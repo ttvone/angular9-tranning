@@ -1,0 +1,121 @@
+<div class="container mt-3">
+    <div class="card">
+        <h4 class="card-header">
+            สร้างรายการสั่งซื้อ
+        </h4>
+        <div class="card-body">
+            <div class="row" [formGroup]="form">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">หมายเลยสั่งซื้อ</label>
+                        <input type="text" class="form-control" formControlName="poNumber">
+                        <span *ngIf="(form.get('poNumber').errors || {}).required" class="invalid-feedback">
+                            กรุณากรอกข้อมูล
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">วันที่สั่งซื้อ</label>
+                        <input type="date" class="form-control" formControlName="poDate">
+                        <span *ngIf="(form.get('poDate').errors || {}).required" class="invalid-feedback">
+                            กรุณากรอกข้อมูล
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="">ชื่อบริษัท</label>
+                        <input type="text" class="form-control" formControlName="companyName">
+                        <span *ngIf="(form.get('companyName').errors || {}).required" class="invalid-feedback">
+                            กรุณากรอกข้อมูล
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">ที่อยู่ชื่อบริษัท</label>
+                        <textarea class="form-control" rows="5" formControlName="companyAddress"></textarea>
+                        <span *ngIf="(form.get('companyAddress').errors || {}).required" class="invalid-feedback">
+                            กรุณากรอกข้อมูล
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="">ที่อยู่ชื่อลูกค้า</label>
+                        <textarea class="form-control" rows="5" formControlName="customerAddress"></textarea>
+                        <span *ngIf="(form.get('customerAddress').errors || {}).required" class="invalid-feedback">
+                            กรุณากรอกข้อมูล
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <form class="row" [formGroup]="formProduct" (submit)="onSubmitProduct()">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">ชื่อสินค้า</label>
+                        <input type="text" class="form-control form-control-sm" formControlName="productName">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">จำนวนสินค้า</label>
+                        <input type="number" class="form-control form-control-sm" formControlName="productAmount">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="">ราคาสินค้าต่อหน่วย</label>
+                        <input type="number" class="form-control form-control-sm" formControlName="productPrice">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="d-none d-md-inline-block">&nbsp;</label>
+                        <button type="submit" class="btn btn-warning btn-block btn-sm">
+                            <ng-template [ngIf]="isEditProduct">แก้ไขสินค้า</ng-template>
+                            <ng-template [ngIf]="!isEditProduct">เพิ่มสินค้าใหม่</ng-template>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ชื่อสินค้า</th>
+                            <th>จำนวนสินค้า</th>
+                            <th>ราคาสินค้าต่อหน่วย</th>
+                            <th>รวม</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of getProductArrays().controls; let index = index">
+                            <td>{{ item.value.productName  }}</td>
+                            <td>{{ item.value.productAmount | number  }}</td>
+                            <td>{{ item.value.productPrice | number : '1.2-2'  }}</td>
+                            <td>{{ item.value.productAmount * item.value.productPrice | number : '1.2-2' }}</td>
+                            <td class="text-right">
+                                <button (click)="onShowEditProduct(index)" class="btn btn-sm btn-warning mr-2">
+                                    แก้ไข
+                                </button>
+                                <button (click)="onRemoveProduct(index)" class="btn btn-sm btn-danger">ลบทิ้ง</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button (click)="onSubmit()" class="btn btn-primary">Save purchase order</button>
+        </div>
+    </div>
+</div>

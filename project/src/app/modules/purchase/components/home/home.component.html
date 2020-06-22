@@ -1,34 +1,41 @@
 <div class="container mt-3">
     <div class="card">
         <h4 class="card-header">
-            Purchase Orders
+            รายการสั่งซื้อทั้งหมดในระบบ
         </h4>
         <div class="card-body">
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th>PO No.</th>
-                        <th>Company name</th>
-                        <th>Date</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let item of Items">
-                        <td>{{ item.poNumber }}</td>
-                        <td>{{ item.companyName }}</td>
-                        <td>{{ item.poDate  | date : 'fullDate' }}</td>
-                        <td class="text-right">
-                            <a href="" class="btn btn-warning btn-sm mr-2">
-                                Update
-                            </a>
-                            <button (click)="onDelete(item)" class="btn btn-danger btn-sm">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="form-group">
+                <a class="btn btn-primary" routerLink="/purchase/create">
+                    สร้างรายการสั่งซื้อ
+                </a>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>หมายเลยสั่งซื้อ</th>
+                            <th>ชื่อบริษัท</th>
+                            <th>วันที่สั่งซื้อ</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of Items">
+                            <td>{{ item.poNumber }}</td>
+                            <td>{{ item.companyName }}</td>
+                            <td>{{ item.poDate  | date : 'fullDate' }}</td>
+                            <td class="text-right">
+                                <a href="" class="btn btn-warning btn-sm mr-2">
+                                    แก้ไข
+                                </a>
+                                <button (click)="onDelete(item)" class="btn btn-danger btn-sm">
+                                    ลบทิ้ง
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

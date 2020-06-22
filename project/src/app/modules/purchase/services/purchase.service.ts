@@ -13,6 +13,11 @@ export class PurchaseService {
         return this.http.get<IPurchase[]>(environment.api + '/api/po');
     }
 
+    /** insert item */
+    saveItem(value: IPurchase) {
+        return this.http.post<{ message: string, data: IPurchase }>(environment.api + '/api/po', value);
+    }
+
     /** delete item */
     deleteItem(id: number) {
         return this.http.delete<{ message: string }>(environment.api + '/api/po/' + id);
