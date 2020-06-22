@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { PurchaseService } from '../../services/purchase.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-create',
@@ -14,24 +15,38 @@ export class CreateComponent implements OnInit {
   form: FormGroup;
   /** ประการตัวแปรมารับฟอร์มตัวสินค้า */
   formProduct: FormGroup;
+  /** เก็บรหัส PO หากว่ามีการแก้ไข */
+  private poId: number;
 
   constructor(
     private builder: FormBuilder,
     private service: PurchaseService,
-    private router: Router
+    private router: Router,
+    private activRoute: ActivatedRoute
   ) {
     this.createFormData();
   }
 
   ngOnInit(): void {
+    this.updateFormData();
   }
 
   /** บันทึกข้อมูล */
   onSubmit() {
     if (this.form.invalid) return this.form.markAllAsTouched();
-    this.service.saveItem(this.form.value).subscribe(() => {
-      this.router.navigate(['/purchase']); // redirect ไปที่หน้ารายการ
-    }, error => alert(error.message));
+    // create
+    if (!this.poId) {
+      this.service.saveItem(this.form.value).subscribe(() => {
+        this.router.navigate(['/purchase']); // redirect ไปที่หน้ารายการ
+      }, error => alert(error.message));
+    }
+    // update
+    else {
+      this.service.updateItem(this.poId, this.form.value).subscribe(() => {
+        this.poId = null;
+        this.router.navigate(['/purchase']); // redirect ไปที่หน้ารายการ
+      }, error => alert(error.message));
+    }
   }
 
   /** บันทึกข้อมูลสินค้า */
@@ -86,7 +101,6 @@ export class CreateComponent implements OnInit {
     this.formProduct.get('editIndex').setValue(index);
   }
 
-
   /** ดึงข้อมูลอาเรย์ของฟอร์มสินค้า */
   getProductArrays() {
     return this.form.get('products') as FormArray;
@@ -115,6 +129,28 @@ export class CreateComponent implements OnInit {
       productAmount: ['', Validators.required],
       productPrice: ['', Validators.required],
       editIndex: [''] // ตรวจสอบว่าเป็นการแก้ไขหรือไม่
+    });
+  }
+
+  /** แก้ไขฟอร์มหลัก */
+  private updateFormData() {
+    const datePipe = new DatePipe('en-US');
+    this.poId = parseFloat(this.activRoute.snapshot.params.id);
+    if (!this.poId) return;
+    // ส่ง id ไปดึงข้อมูลจาก server มา
+    this.service.getItem(this.poId).subscribe(data => {
+      data.poDate = datePipe.transform(data.poDate, 'yyyy-MM-dd');
+      this.form.patchValue(data);
+      const products = this.getProductArrays();
+      data.products.forEach(m => {
+        const createForm = this.builder.group({
+          productName: ['', Validators.required],
+          productAmount: ['', Validators.required],
+          productPrice: ['', Validators.required]
+        });
+        createForm.patchValue(m);
+        products.push(createForm);
+      });
     });
   }
 }

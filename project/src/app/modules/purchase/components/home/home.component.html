@@ -23,9 +23,10 @@
                         <tr *ngFor="let item of Items">
                             <td>{{ item.poNumber }}</td>
                             <td>{{ item.companyName }}</td>
-                            <td>{{ item.poDate  | date : 'fullDate' }}</td>
+                            <td>{{ item.poDate  | date : 'dd-MM-yyyy' }}</td>
                             <td class="text-right">
-                                <a href="" class="btn btn-warning btn-sm mr-2">
+                                <a class="btn btn-warning btn-sm mr-2"
+                                    [routerLink]="['/purchase', 'update', item.poId]">
                                     แก้ไข
                                 </a>
                                 <button (click)="onDelete(item)" class="btn btn-danger btn-sm">

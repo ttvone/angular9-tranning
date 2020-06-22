@@ -20,6 +20,7 @@ import { SharedModule } from 'src/app/shared.module';
     RouterModule.forChild([
       { path: '', component: HomeComponent },
       { path: 'create', component: CreateComponent },
+      { path: 'update/:id', component: CreateComponent },
     ])
   ]
 })

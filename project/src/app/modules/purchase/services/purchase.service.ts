@@ -13,9 +13,19 @@ export class PurchaseService {
         return this.http.get<IPurchase[]>(environment.api + '/api/po');
     }
 
+    /** get item by id */
+    getItem(id: number) {
+        return this.http.get<IPurchase>(environment.api + '/api/po/' + id);
+    }
+
     /** insert item */
     saveItem(value: IPurchase) {
         return this.http.post<{ message: string, data: IPurchase }>(environment.api + '/api/po', value);
+    }
+
+    /** update item */
+    updateItem(id: number, value: IPurchase) {
+        return this.http.put<{ message: string, data: IPurchase }>(environment.api + '/api/po/' + id, value);
     }
 
     /** delete item */
